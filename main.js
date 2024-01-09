@@ -93,6 +93,41 @@ app.put('/users/:id', async (req, res) => {
     }
 });
 
+app.patch('/users/:id', async (req, res) => {
+    try {
+        const {id} = req.params;
+        const {name, age, email} = req.body;
+
+        const users = await fsService.readerDataBase();
+        const user = users.find((user) => user.id === Number(id));
+
+        if (!user) {
+            throw new Error('user not found');
+        }
+
+        if (name && (!name || name.length < 2)) {
+            throw new Error('user name must be longer than 3 characters');
+        }
+        if (name) user.name = name;
+
+        if (age && (!age || age < 1)) {
+            throw new Error('user age - not less than zero');
+        }
+        if (age) user.age = age;
+
+        if (email && (!email || !email.includes('@'))) {
+            throw new Error('user email address is not valid');
+        }
+        if (email) user.email = email;
+
+        await fsService.writeDataBase(users);
+
+        res.status(201).json(user);
+    } catch (e) {
+        res.status(404).json(e.message);
+    }
+});
+
 app.delete('/users/:id', async (req, res) => {
     try {
         const {id} = req.params;
