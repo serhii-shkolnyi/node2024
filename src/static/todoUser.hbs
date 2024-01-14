@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        ul[class], ol[class] {
+            padding: 0;
+        }
+
+        body, h1, h2, h3, h4, p, ul[class], ol[class], li, figure, figcaption, blockquote, dl, dd {
+            margin: 0;
+        }
+
+        body {
+            min-height: 100svh;
+            scroll-behavior: smooth;
+            text-rendering: optimizeSpeed;
+            line-height: 1.5;
+        }
+
+        ul[class],
+        ol[class] {
+            list-style: none;
+        }
+
+        a:not([class]) {
+            text-decoration-skip-ink: auto;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        article > * + * {
+            margin-top: 1em;
+        }
+
+        input, button, textarea, select {
+            font: inherit;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        .wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: #c8efa9;
+        }
+
+        .wrapper-users {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background-color: #c8efa9;
+        }
+
+        .fs-25 {
+            font-size: 25px;
+        }
+
+        .form {
+            width: 400px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form p {
+            text-align: center;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+            cursor: default;
+        }
+
+        .input {
+            width: 100%;
+            height: 37px;
+            margin: 4px 0;
+            border: 0;
+            border-radius: 5px;
+            padding: 3px 12px;
+        }
+
+        .input:hover {
+            box-shadow: 0 0 5px darkgray;
+        }
+
+        .input:focus {
+            outline: none;
+            box-shadow: 0 0 5px darkgray;
+        }
+
+        .btn {
+            width: 70%;
+            background-color: darkgray;
+            cursor: pointer;
+            font-size: 18px;
+            color: #000;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 5px darkgray;
+            text-decoration: underline;
+        }
+
+        .user {
+
+        }
+
+        .user:hover {
+
+        }
+
+        th {
+            width: 225px;
+            height: 35px;
+            text-align: center;
+            border: 1px solid black;
+        }
+
+        tr:nth-child(odd) {
+            background-color: lightgray;
+        }
+
+        tr:nth-child(even) {
+            background-color: white;
+        }
+
+        .id {
+            width: 50px;
+            height: 35px;
+            text-align: center;
+        }
+
+        .age {
+            width: 100px;
+            height: 35px;
+            text-align: center;
+        }
+
+        .update {
+            width: 100px;
+            height: 35px;
+            background: lightgreen;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .delete {
+            width: 100px;
+            height: 35px;
+            background: lightcoral;
+            text-align: center;
+        }
+
+        .error {
+            font-size: 18px;
+            color: red;
+        }
+
+        .todo {
+            width: 800px;
+            height: 35px;
+            background-color: lightgoldenrodyellow;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .todo.active{
+            background-color: lightcoral;
+            text-decoration: line-through;
+        }
+
+        .button {
+            border-radius: 10px;
+            background-color: #ff8043;
+            color: white;
+            border: none;
+            margin: 0 15px;
+            cursor: pointer;
+        }
+
+        span {
+            padding-left: 10px;
+            text-align: start;
+        }
+    </style>
+    <title>todo-{{this.email}}</title>
+</head>
+<body class="wrapper">
+
+<form class="form" action="/todo-user/{{this.email}}" method="post">
+
+
+    <h1 class="title">ToDo List {{this.email}}</h1>
+    <input class="input" type="text" name="todoText" placeholder="todo text">
+
+    <input class="input btn" type="submit" value="submit">
+
+
+    {{#each todoArr}}
+        <div class="todo" onclick="click">
+            <span>{{this}}</span>
+        </div>
+    {{/each}}
+</form>
+</body>
+<script>
+
+    let checkButtons = document.getElementsByClassName("todo");
+    for (const checkButton of checkButtons) {
+        checkButton.addEventListener("click", () => {
+            checkButton.classList.toggle("active");
+        })
+    }
+
+
+</script>
+</html>
