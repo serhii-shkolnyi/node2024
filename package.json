@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start:db": "docker compose up -d",
     "start:dev": "rimraf dist && tsc-watch --onSuccess 'npm run watch:server'",
     "watch:server": "nodemon 'src/main.ts' --watch './src'"
   },
